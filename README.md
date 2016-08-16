@@ -6,11 +6,11 @@ Use the supplied Android project (gradle) template to implement the following re
 
 * The app should fetch remote data from three servers (data is in JSON format).
 Each server returns a different format of JSON data, that contains an image url, title and a subtitle/text.
-Each server can return more than one result.
+Each server can return **more than one result**.
 * The predefined URLs for the different servers are to be found under ```Consts``` class.
 * The data should be parsed, aggregated and presented in a predefined ```RecyclerView``` in ```MainActivity```
-* The layout for each item in the RecyclerView is already written for you at res/layout/card_item.xml
-* ```card_item.xml``` contains ```ImageView``` and two ```TextView``` one for the title and the other for subtitle/text, which you will populate from the data you fetched and parsed from each server.
+* The layout for each item in the ```RecyclerView``` is already written for you at res/layout/card_item.xml
+* ```card_item.xml``` contains ```ImageView``` and two ```TextView``` one for the title and the other for subtitle/text, which you will populate from the data you fetched and parsed from the different servers.
 * Data should be presented in the ```RecyclerView``` **only** when **all** of the data is fetched from the different servers.
   (You can show a cool progress bar meanwhile)
 
