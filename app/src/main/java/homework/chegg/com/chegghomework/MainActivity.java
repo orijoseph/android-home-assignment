@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setupToolbar();
         buildUI();
     }
 
@@ -29,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void buildUI() {
 
+        setContentView(R.layout.activity_main);
+        setupToolbar();
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
     }
 
