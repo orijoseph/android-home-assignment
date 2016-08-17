@@ -10,6 +10,7 @@ Each endpoint can return **more than one result**.
 * The predefined URLs for the different endpoints are to be found under ```Consts``` class.
 * **Data Mapping:**
     * Data source A : 
+    
         ```
         {
           "stories": [
