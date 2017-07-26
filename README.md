@@ -65,18 +65,20 @@ Each endpoint can return **more than one result**.
 * ```card_item.xml``` contains ```ImageView``` and two ```TextView``` one for the title and the other for subtitle/text, which you will populate from the data you fetched and parsed from the different servers.
 * Data should be presented in the ```RecyclerView``` **only** when **all** of the data is fetched from the different endpoints.
   (You can show a cool progress bar meanwhile)
+* Add a caching layer for each data source. 
+  * Cache stale times:
+      * Source A - 5 min
+      * Source B - 30 min
+      * Source C - 60 min  
   
 * Make sure your code is easily extensible for any future data endpoints, easy to understand for future developers, and beautiful!
 * Feel free to make the UI as delightful as you like (animations and so on).
 
 **Important**
 
-   * You are encouraged to use any 3rd party library that you like working with, i.e. [Volley](https://developer.android.com/training/volley/index.html).
+   * You are encouraged to use any 3rd party library that you like working with, i.e. [Retrofit](http://square.github.io/retrofit/).
 
 **Bonus**
 
-  * Add a caching layer for each data source. 
-    * Cache stale times:
-        Source A - 5 min
-        Source B - 30 min
-        Source C - 60 min
+* We love animations! Add some cool stuff to the RecyclerView and wherever you feel it fits.  
+ 
