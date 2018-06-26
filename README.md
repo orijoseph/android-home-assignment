@@ -2,6 +2,10 @@
 
 Use the supplied Android project (gradle) template to implement the following requirements: 
 
+**General Note**
+* You should expect ~ 10 hours of work effort to be delivered within 72 hours.    
+* If we find flaws, expect us to kindly ask you for fix, we believe in second chance.  
+
 **Requirements**
 
 * The app should fetch remote data from three endpoints (data is in JSON format).
@@ -80,5 +84,6 @@ Each endpoint can return **more than one result**.
 
 **Bonus**
 
-* We love animations! Add some cool stuff to the RecyclerView and wherever you feel it fits.  
+* We love animations! Add some cool stuff to the RecyclerView and wherever you feel it fits.
+* We believe in unit testing, show us that you are a believer as well.   
  
