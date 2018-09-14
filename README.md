@@ -14,8 +14,7 @@ Each endpoint can return **more than one result**.
 * The predefined URLs for the different endpoints are to be found under ```Consts``` class.
 * **Data Mapping:**
     * Data source A : 
-    
-        ```
+        ```json
         {
           "stories": [
             {
@@ -29,8 +28,7 @@ Each endpoint can return **more than one result**.
         ```
     * Data source B : 
         * The relevant fields here are "header", "description" and "picture".
-        
-        ```
+        ```json
          {
            "metadata": {
              "this": "isnotimportant",
@@ -50,9 +48,9 @@ Each endpoint can return **more than one result**.
         ```
     
     * Data source C :
-         * subtitle here is a concat of subLine1 + subLine2.
+         * subtitle here is a concatintation of subLine1 + subLine2.
      
-        ```
+        ```json
         [
           {
             "topLine": "Latest article",
@@ -75,7 +73,7 @@ Each endpoint can return **more than one result**.
       * Source B - 30 min
       * Source C - 60 min  
   
-* Make sure your code is easily extensible for any future data endpoints, easy to understand for future developers, and beautiful!
+* Please Make sure your code is easily extensible for any future data endpoints, easy to understand for future developers, and beautiful!
 * Feel free to make the UI as delightful as you like (animations and so on).
 
 **Important**
