@@ -3,6 +3,7 @@ package homework.chegg.com.chegghomework.features
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import homework.chegg.com.chegghomework.data.IDetailsTiDisplay
+import homework.chegg.com.chegghomework.data.Response
 import homework.chegg.com.chegghomework.data.repositories.DataRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,35 +19,27 @@ class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
     fun getData() {
 
         Observables.zip(
-                dataRepository.getStories().onErrorReturn { listOf() },
-                dataRepository.getArticles().onErrorReturn { listOf() },
-                dataRepository.getArticles2().onErrorReturn { listOf() }
+                dataRepository.getStories()
+                        .map { Response.Success(it) as Response<List<IDetailsTiDisplay>> }
+                        .onErrorReturn { Response.Error(it) },
+                dataRepository.getArticles()
+                        .map { Response.Success(it) as Response<List<IDetailsTiDisplay>> }
+                        .onErrorReturn { Response.Error(it) },
+                dataRepository.getArticles2()
+                        .map { Response.Success(it) as Response<List<IDetailsTiDisplay>> }
+                        .onErrorReturn { Response.Error(it) }
         ) { responseA, responseB, responseC ->
 
             val viewState: MainActivityState
-            var loadedAll = true
             var loadedList = mutableListOf<IDetailsTiDisplay>()
 
-            if (responseA.isNullOrEmpty()) {
-                loadedAll = false
-            } else {
-                loadedList.addAll(responseA)
-            }
+            val error = responseA.error != null || responseB.error != null || responseC.error != null
 
-            if (responseB.isNullOrEmpty()) {
-                loadedAll = false
-            } else {
-                loadedList.addAll(responseB)
-            }
+            loadedList.addAll(responseA.data?: emptyList())
+            loadedList.addAll(responseB.data?: emptyList())
+            loadedList.addAll(responseC.data?: emptyList())
 
-            if (responseC.isNullOrEmpty()) {
-                loadedAll = false
-            } else {
-                loadedList.addAll(responseC)
-            }
-
-
-            viewState = if (!loadedAll) {
+            viewState = if (error) {
                 MainActivityState.NotAllLoaded(loadedList)
             } else {
                 MainActivityState.LoadedAll(loadedList)
