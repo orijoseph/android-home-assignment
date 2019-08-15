@@ -38,11 +38,10 @@ data class Article2(
     }
 }
 
-data class DetailsTiDisplay(
-        var title: String? = null,
-        var subtitle: String? = null,
-        var imageUrl: String? = null
-)
+data class DetailsTiDisplay(var title: String? = null,
+                            var subtitle: String? = null,
+                            var imageUrl: String? = null)
+
 
 data class CahcedResponse(val lastEntery: Long = -1,
                           val cachedData: List<IDetailsTiDisplay>? = mutableListOf())

@@ -3,8 +3,6 @@ package homework.chegg.com.chegghomework.features
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import homework.chegg.com.chegghomework.data.IDetailsTiDisplay
-import homework.chegg.com.chegghomework.data.ResponseA
-import homework.chegg.com.chegghomework.data.ResponseB
 import homework.chegg.com.chegghomework.data.repositories.DataRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,9 +16,10 @@ class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
     val disposable = CompositeDisposable()
 
     fun getData() {
+
         Observables.zip(
-                dataRepository.getStories().onErrorReturn { ResponseA() },
-                dataRepository.getArticles().onErrorReturn { ResponseB() },
+                dataRepository.getStories().onErrorReturn { listOf() },
+                dataRepository.getArticles().onErrorReturn { listOf() },
                 dataRepository.getArticles2().onErrorReturn { listOf() }
         ) { responseA, responseB, responseC ->
 
@@ -28,16 +27,16 @@ class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
             var loadedAll = true
             var loadedList = mutableListOf<IDetailsTiDisplay>()
 
-            if (responseA.stories.isNullOrEmpty()) {
-                 loadedAll = false
+            if (responseA.isNullOrEmpty()) {
+                loadedAll = false
             } else {
-                loadedList.addAll(responseA.stories!!)
+                loadedList.addAll(responseA)
             }
 
-            if (responseB.metadata?.articles.isNullOrEmpty()) {
-                 loadedAll = false
+            if (responseB.isNullOrEmpty()) {
+                loadedAll = false
             } else {
-                loadedList.addAll(responseB.metadata?.articles!!)
+                loadedList.addAll(responseB)
             }
 
             if (responseC.isNullOrEmpty()) {
@@ -47,7 +46,7 @@ class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
             }
 
 
-            viewState = if (!loadedAll){
+            viewState = if (!loadedAll) {
                 MainActivityState.NotAllLoaded(loadedList)
             } else {
                 MainActivityState.LoadedAll(loadedList)
@@ -66,6 +65,5 @@ class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()
-
     }
 }

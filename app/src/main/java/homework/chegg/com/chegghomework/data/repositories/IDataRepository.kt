@@ -1,14 +1,12 @@
 package homework.chegg.com.chegghomework.data.repositories
 
-import homework.chegg.com.chegghomework.data.ResponseA
-import homework.chegg.com.chegghomework.data.ResponseB
-import homework.chegg.com.chegghomework.data.Article2
+import homework.chegg.com.chegghomework.data.IDetailsTiDisplay
 import io.reactivex.Observable
 
 interface IDataRepository {
-    fun getStories(): Observable<ResponseA>
+    fun getStories(): Observable<List<IDetailsTiDisplay>>
 
-    fun getArticles(): Observable<ResponseB>
+    fun getArticles(): Observable<List<IDetailsTiDisplay>>
 
-    fun getArticles2(): Observable<List<Article2>>
+    fun getArticles2(): Observable<List<IDetailsTiDisplay>>
 }
