@@ -9,12 +9,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import homework.chegg.com.chegghomework.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import android.view.animation.AnimationUtils.loadLayoutAnimation
-import android.view.animation.LayoutAnimationController
-import android.R
-import android.view.animation.AnimationUtils
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(homework.chegg.com.chegghomework.R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         buildUI()
 
@@ -46,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
 
-        toolbar = findViewById<View>(homework.chegg.com.chegghomework.R.id.toolbar) as Toolbar
+        toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
     }
 
@@ -75,14 +72,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
-        menuInflater.inflate(homework.chegg.com.chegghomework.R.menu.menu_main_activity, menu)
+        menuInflater.inflate(R.menu.menu_main_activity, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            homework.chegg.com.chegghomework.R.id.action_refresh -> {
+            R.id.action_refresh -> {
                 onRefreshData()
                 return true
             }

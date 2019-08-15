@@ -16,11 +16,11 @@ class LocalDataRepository {
         cachedData[url] = CahcedResponse(System.currentTimeMillis(), data)
     }
 
-    fun isTimeHasNotExpired(exoirationTimeInMinutes: Long, callType: String): Boolean {
+    fun isTimeHasNotExpired(expirationTimeInMinutes: Long, callType: String): Boolean {
 
-        var responseTime = cachedData[callType]?.lastEntery!!
+        val responseTime = cachedData[callType]?.lastEntery!!
 
         val delta = System.currentTimeMillis() - responseTime
-        return delta < TimeUnit.MINUTES.toMillis(exoirationTimeInMinutes)
+        return delta < TimeUnit.MINUTES.toMillis(expirationTimeInMinutes)
     }
 }

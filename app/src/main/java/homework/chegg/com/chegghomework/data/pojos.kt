@@ -8,33 +8,34 @@ data class ResponseB(@SerializedName("metadata") var metadata: MetaData? = null)
 
 data class MetaData(@SerializedName("innerdata") var articles: List<Article>? = null)
 
-data class Article(
-        @SerializedName("aticleId") var aticleId: Int? = null,
-        @SerializedName("picture") var picture: String? = null
+data class ArticleWrapper(@SerializedName("header") var header: String,
+                          @SerializedName("description") var description: String)
+
+data class Article(@SerializedName("aticleId") var aticleId: Int? = null,
+                   @SerializedName("picture") var picture: String? = null,
+                   @SerializedName("articlewrapper") var articlewrapper: ArticleWrapper? = null
 ) : IDetailsTiDisplay {
     override fun convertToDisplayObject(): DetailsTiDisplay {
-        return DetailsTiDisplay(aticleId.toString(), "", picture)
+        return DetailsTiDisplay(articlewrapper?.header, articlewrapper?.description, picture)
     }
 }
 
-data class Story(
-        @SerializedName("title") var title: String? = null,
-        @SerializedName("subtitle") var subtitle: String? = null,
-        @SerializedName("imageUrl") var imageUrl: String? = null
+data class Story(@SerializedName("title") var title: String? = null,
+                 @SerializedName("subtitle") var subtitle: String? = null,
+                 @SerializedName("imageUrl") var imageUrl: String? = null
 ) : IDetailsTiDisplay {
     override fun convertToDisplayObject(): DetailsTiDisplay {
         return DetailsTiDisplay(title, subtitle, imageUrl)
     }
 }
 
-data class Article2(
-        @SerializedName("topLine") var topLine: String? = null,
-        @SerializedName("subLine1") var subLine1: String? = null,
-        @SerializedName("subline2") var subline2: String? = null,
-        @SerializedName("image") var image: String? = null
+data class Article2(@SerializedName("topLine") var topLine: String? = null,
+                    @SerializedName("subLine1") var subLine1: String? = null,
+                    @SerializedName("subline2") var subline2: String? = null,
+                    @SerializedName("image") var image: String? = null
 ) : IDetailsTiDisplay {
     override fun convertToDisplayObject(): DetailsTiDisplay {
-        return DetailsTiDisplay(topLine, subLine1, image)
+        return DetailsTiDisplay(topLine, "$subLine1$subline2", image)
     }
 }
 
