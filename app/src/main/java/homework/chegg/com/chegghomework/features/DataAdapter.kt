@@ -26,14 +26,12 @@ class DataAdapter : ListAdapter<IDetailsTiDisplay, DataAdapter.ViewHolder>(CALLB
 
     class ViewHolder(rowLayout: View) : RecyclerView.ViewHolder(rowLayout) {
 
-        private val glideRequest = Glide.with(rowLayout.context)
-
         private val icon = rowLayout.findViewById<ImageView>(R.id.imageView_card_item)
         private val title = rowLayout.findViewById<TextView>(R.id.textView_card_item_title)
         private val subTitle = rowLayout.findViewById<TextView>(R.id.textView_card_item_subtitle)
 
         fun bind(data: DetailsTiDisplay) {
-            glideRequest.load(data.imageUrl).into(icon)
+            Glide.with(icon.context).load(data.imageUrl).into(icon)
             title.text = data.title
             subTitle.text = data.subtitle
         }

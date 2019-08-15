@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import android.view.animation.AnimationUtils.loadLayoutAnimation
+import android.view.animation.LayoutAnimationController
+import android.R
+import android.view.animation.AnimationUtils
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         buildUI()
 
-        mViewModel.viewState.observe(this, Observer { upDateUi(it) })
+        mViewModel.viewState.observe(this, Observer { updateUi(it) })
 
         mViewModel.getData()
     }
 
     private fun buildUI() {
+
         data_recycler_view.layoutManager = LinearLayoutManager(this)
         data_recycler_view.addItemDecoration(DividerItemDecoration(data_recycler_view.context, requestedOrientation))
         data_recycler_view.adapter = adapter
@@ -45,10 +50,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
-    private fun upDateUi(state: MainActivityState?) {
+    private fun updateUi(state: MainActivityState?) {
         when (state) {
             is MainActivityState.LoadingState -> {
                 displayLoading(state.displayLoading)
+                adapter.submitList(state.list)
             }
 
             is MainActivityState.NotAllLoaded -> {
@@ -64,11 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayLoading(displayLoading: Boolean) {
-        if (displayLoading) {
-            progress.visibility  = View.VISIBLE
-        } else {
-            progress.visibility  = View.GONE
-        }
+        progress.visibility = if (displayLoading) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -88,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    // TODO fetch data from all data sources, aggregate data and display in RecyclerView
     private fun onRefreshData() {
         mViewModel.getData()
     }

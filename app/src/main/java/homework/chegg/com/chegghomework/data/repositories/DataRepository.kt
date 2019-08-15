@@ -1,6 +1,5 @@
 package homework.chegg.com.chegghomework.data.repositories
 
-import android.annotation.SuppressLint
 import homework.chegg.com.chegghomework.Consts
 import homework.chegg.com.chegghomework.data.Article2
 import homework.chegg.com.chegghomework.data.ResponseA
@@ -11,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 class DataRepository(val local: LocalDataRepository,
                      val remote: RemoteDataRepository) : IDataRepository {
 
-    @SuppressLint("CheckResult")
+
     override fun getStories(): Observable<ResponseA> {
         return local.getStories()
                 .subscribeOn(Schedulers.io())

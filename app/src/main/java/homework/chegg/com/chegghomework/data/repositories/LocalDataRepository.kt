@@ -2,12 +2,15 @@ package homework.chegg.com.chegghomework.data.repositories
 
 import homework.chegg.com.chegghomework.Consts
 import homework.chegg.com.chegghomework.data.Article2
+import homework.chegg.com.chegghomework.data.CahcedResponse
 import homework.chegg.com.chegghomework.data.ResponseA
 import homework.chegg.com.chegghomework.data.ResponseB
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
 class LocalDataRepository : IDataRepository {
+
+    private val cachedData = mutableMapOf<String, CahcedResponse>()
 
     var responseAInfo: ResponseA? = ResponseA()
     var responseBInfo: ResponseB? = ResponseB()
@@ -51,6 +54,7 @@ class LocalDataRepository : IDataRepository {
                 responseTime = responseCTime
             }
         }
+
         val delta = System.currentTimeMillis() - responseTime
         return delta < TimeUnit.MINUTES.toMillis(exoirationTimeInMinutes)
     }

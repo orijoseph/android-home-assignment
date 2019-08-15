@@ -6,8 +6,6 @@ data class ResponseA(@SerializedName("stories") var stories: List<Story>? = null
 
 data class ResponseB(@SerializedName("metadata") var metadata: MetaData? = null)
 
-//data class ResponseC(var responseCList: List<Article2>? = null)
-
 data class MetaData(@SerializedName("innerdata") var articles: List<Article>? = null)
 
 data class Article(
@@ -27,7 +25,6 @@ data class Story(
     override fun convertToDisplayObject(): DetailsTiDisplay {
         return DetailsTiDisplay(title, subtitle, imageUrl)
     }
-
 }
 
 data class Article2(
@@ -39,7 +36,6 @@ data class Article2(
     override fun convertToDisplayObject(): DetailsTiDisplay {
         return DetailsTiDisplay(topLine, subLine1, image)
     }
-
 }
 
 data class DetailsTiDisplay(
@@ -47,3 +43,6 @@ data class DetailsTiDisplay(
         var subtitle: String? = null,
         var imageUrl: String? = null
 )
+
+data class CahcedResponse(val lastEntery: Long = -1,
+                          val cachedData: List<IDetailsTiDisplay>? = mutableListOf())

@@ -1,6 +1,5 @@
 package homework.chegg.com.chegghomework.features
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import homework.chegg.com.chegghomework.data.IDetailsTiDisplay
@@ -8,15 +7,16 @@ import homework.chegg.com.chegghomework.data.ResponseA
 import homework.chegg.com.chegghomework.data.ResponseB
 import homework.chegg.com.chegghomework.data.repositories.DataRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Observables
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
 
     val viewState = MutableLiveData<MainActivityState>()
+    val disposable = CompositeDisposable()
 
-
-    @SuppressLint("CheckResult")
     fun getData() {
         Observables.zip(
                 dataRepository.getStories().onErrorReturn { ResponseA() },
@@ -55,10 +55,17 @@ class DataViewModel(val dataRepository: DataRepository) : ViewModel() {
 
             return@zip viewState
 
-        }.subscribeOn(Schedulers.io()).doOnSubscribe { viewState.value = MainActivityState.LoadingState() }
+        }.subscribeOn(Schedulers.io())
+                .doOnSubscribe { viewState.value = MainActivityState.LoadingState() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     viewState.value = it
-                }
+                }.addTo(disposable)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.dispose()
+
     }
 }
