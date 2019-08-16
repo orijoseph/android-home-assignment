@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import homework.chegg.com.chegghomework.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             is MainActivityState.NotAllLoaded -> {
                 displayLoading(state.displayLoading)
                 adapter.submitList(state.list)
+                showNotAllDataHasBeenUploadedMessage()
             }
 
             is MainActivityState.LoadedAll -> {
@@ -64,6 +66,14 @@ class MainActivity : AppCompatActivity() {
                 adapter.submitList(state.list)
             }
         }
+    }
+
+    private fun showNotAllDataHasBeenUploadedMessage() {
+        val snackbar = Snackbar
+                .make(data_recycler_view, "Not all Data has been uploaded", Snackbar.LENGTH_LONG)
+                .setAction("Reload")
+                { view -> mViewModel.getData() }.addCallback(object : Snackbar.Callback() {})
+        snackbar.show()
     }
 
     private fun displayLoading(displayLoading: Boolean) {

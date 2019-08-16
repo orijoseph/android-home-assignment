@@ -8,5 +8,4 @@ sealed class MainActivityState(val displayLoading: Boolean,
     class LoadingState : MainActivityState(displayLoading = true, didLoadAll = false, list = mutableListOf())
     class NotAllLoaded(list: List<IDetailsTiDisplay>) : MainActivityState(displayLoading = false, didLoadAll = false, list = list)
     class LoadedAll(list: List<IDetailsTiDisplay>) : MainActivityState(displayLoading = false, didLoadAll = true, list = list)
-    class NoDataToShow() : MainActivityState(displayLoading = false, didLoadAll = false, list = mutableListOf())
 }
